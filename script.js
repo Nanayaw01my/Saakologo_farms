@@ -4,6 +4,7 @@ const navMenu = document.getElementById('navMenu');
 
 menuToggle.addEventListener('click', () => {
     navMenu.classList.toggle('active');
+    menuToggle.classList.toggle('active');
 });
 
 // Close menu when a link is clicked
@@ -11,15 +12,17 @@ const navLinks = navMenu.querySelectorAll('a');
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         navMenu.classList.remove('active');
+        menuToggle.classList.remove('active');
     });
 });
 
 // Smooth scrolling for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && document.querySelector(href)) {
+            e.preventDefault();
+            const target = document.querySelector(href);
             target.scrollIntoView({
                 behavior: 'smooth',
                 block: 'start'
@@ -35,32 +38,29 @@ if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // Get form data
-        const formData = new FormData(contactForm);
-        const data = {
-            name: formData.get('name') || contactForm.querySelector('input[type="text"]').value,
-            email: formData.get('email') || contactForm.querySelector('input[type="email"]').value,
-            phone: formData.get('phone') || contactForm.querySelector('input[type="tel"]').value,
-            service: contactForm.querySelector('select').value,
-            message: contactForm.querySelector('textarea').value
-        };
+        // Get form values
+        const name = contactForm.querySelector('input[type="text"]').value.trim();
+        const email = contactForm.querySelector('input[type="email"]').value.trim();
+        const phone = contactForm.querySelector('input[type="tel"]').value.trim();
+        const service = contactForm.querySelector('select').value;
+        const message = contactForm.querySelector('textarea').value.trim();
 
         // Validate form data
-        if (!data.name || !data.email || !data.phone || !data.service || !data.message) {
+        if (!name || !email || !phone || !service || !message) {
             showNotification('Please fill in all fields', 'error');
             return;
         }
 
         // Validate email format
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(data.email)) {
+        if (!emailRegex.test(email)) {
             showNotification('Please enter a valid email address', 'error');
             return;
         }
 
         // Validate phone format
         const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
-        if (!phoneRegex.test(data.phone)) {
+        if (!phoneRegex.test(phone)) {
             showNotification('Please enter a valid phone number', 'error');
             return;
         }
@@ -71,13 +71,22 @@ if (contactForm) {
         submitBtn.disabled = true;
         submitBtn.textContent = 'Sending...';
 
-        // Simulate API call with timeout
+        // Simulate API call
         setTimeout(() => {
-            // Generate WhatsApp message
-            const whatsappMessage = `Hi Saakologo Farms,\n\nName: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nService: ${data.service}\nMessage: ${data.message}`;
+            // Generate WhatsApp message with service name
+            const serviceNames = {
+                'pig': 'Pig Farming',
+                'poultry': 'Poultry Farming',
+                'turkey': 'Turkey Production',
+                'crop': 'Crop Farming',
+                'partnership': 'Order & Partnership'
+            };
+
+            const serviceName = serviceNames[service] || service;
+            const whatsappMessage = `Hi Saakologo Farms,\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${serviceName}\n\nMessage:\n${message}`;
             const whatsappUrl = `https://wa.me/233557480306?text=${encodeURIComponent(whatsappMessage)}`;
 
-            showNotification('Message sent successfully! Redirecting to WhatsApp...', 'success');
+            showNotification('✓ Message ready! Opening WhatsApp...', 'success');
 
             // Reset form
             contactForm.reset();
@@ -114,37 +123,42 @@ function showNotification(message, type = 'success') {
 
     document.body.appendChild(notification);
 
-    // Add styles for notification
-    const style = document.createElement('style');
+    // Add styles for notification if not already added
     if (!document.querySelector('#notification-styles')) {
+        const style = document.createElement('style');
         style.id = 'notification-styles';
         style.textContent = `
             .notification {
                 position: fixed;
                 top: 20px;
                 right: 20px;
-                padding: 15px 20px;
-                border-radius: 5px;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+                padding: 16px 24px;
+                border-radius: 8px;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
                 animation: slideIn 0.3s ease;
                 z-index: 1000;
                 max-width: 400px;
+                font-weight: 500;
             }
 
             .notification-success {
-                background-color: #4caf50;
+                background: linear-gradient(135deg, #388e3c, #2e7d32);
                 color: white;
             }
 
             .notification-error {
-                background-color: #f44336;
+                background: linear-gradient(135deg, #f44336, #d32f2f);
                 color: white;
             }
 
             .notification-content {
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                gap: 12px;
+            }
+
+            .notification-content i {
+                font-size: 1.2rem;
             }
 
             @keyframes slideIn {
@@ -158,11 +172,23 @@ function showNotification(message, type = 'success') {
                 }
             }
 
+            @keyframes slideOut {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+            }
+
             @media (max-width: 480px) {
                 .notification {
                     right: 10px;
                     left: 10px;
                     top: 10px;
+                    max-width: none;
                 }
             }
         `;
@@ -178,57 +204,14 @@ function showNotification(message, type = 'success') {
     }, 5000);
 }
 
-// Scroll to top button
+// Create Scroll to Top Button
 function createScrollToTopButton() {
     const button = document.createElement('button');
     button.id = 'scrollToTop';
-    button.innerHTML = '<i class="fas fa-arrow-up"></i>';
     button.className = 'scroll-to-top';
+    button.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    button.setAttribute('aria-label', 'Scroll to top');
     document.body.appendChild(button);
-
-    const style = document.createElement('style');
-    style.textContent = `
-        .scroll-to-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            background-color: #388e3c;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            z-index: 999;
-            transition: all 0.3s ease;
-        }
-
-        .scroll-to-top.show {
-            display: flex;
-        }
-
-        .scroll-to-top:hover {
-            background-color: #1b5e20;
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
-        }
-
-        @media (max-width: 480px) {
-            .scroll-to-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1rem;
-            }
-        }
-    `;
-    document.head.appendChild(style);
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
@@ -246,7 +229,6 @@ function createScrollToTopButton() {
     });
 }
 
-// Initialize scroll to top button
 createScrollToTopButton();
 
 // Intersection Observer for animations
@@ -265,11 +247,11 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe service cards and feature items
-document.querySelectorAll('.service-card, .feature-item').forEach(el => {
+// Observe elements for animation
+document.querySelectorAll('.service-card, .feature-item, .testimonial-card').forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     observer.observe(el);
 });
 
@@ -321,26 +303,28 @@ validationStyles.textContent = `
     .contact-form input.valid,
     .contact-form select.valid,
     .contact-form textarea.valid {
-        border-color: #4caf50;
+        border-color: #4caf50 !important;
         background-color: rgba(76, 175, 80, 0.05);
     }
 
     .contact-form input.error,
     .contact-form select.error,
     .contact-form textarea.error {
-        border-color: #f44336;
+        border-color: #f44336 !important;
         background-color: rgba(244, 67, 54, 0.05);
     }
 `;
 document.head.appendChild(validationStyles);
 
-// Performance optimization - lazy load images
+// Lazy load images
 if ('IntersectionObserver' in window) {
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
-                img.src = img.dataset.src || img.src;
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                }
                 img.classList.add('loaded');
                 observer.unobserve(img);
             }
@@ -352,5 +336,20 @@ if ('IntersectionObserver' in window) {
     });
 }
 
+// Add smooth scroll behavior for older browsers
+if (!CSS.supports('scroll-behavior', 'smooth')) {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            const target = document.querySelector(href);
+            if (target) {
+                e.preventDefault();
+                target.scrollIntoView({ behavior: 'auto', block: 'start' });
+            }
+        });
+    });
+}
+
 // Log when page loads
-console.log('Saakologo Farms website loaded successfully!');
+console.log('🌾 Saakologo Farms website loaded successfully!');
+console.log('Together, let\'s grow agriculture and feed our nation!');
