@@ -971,9 +971,16 @@ a { color: var(--secondary); text-decoration: none; }
    ============================================ */
 
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    h2 { font-size: 1.8rem; }
+    :root {
+        --text: #1a1a1a;
+    }
 
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.6rem; }
+    h3 { font-size: 1.1rem; }
+    p { font-size: 0.95rem; }
+
+    /* Navigation */
     .menu-toggle {
         display: flex;
     }
@@ -989,10 +996,11 @@ a { color: var(--secondary); text-decoration: none; }
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease;
+        z-index: 99;
     }
 
     .nav-menu.active {
-        max-height: 400px;
+        max-height: 500px;
         padding: 20px 0;
     }
 
@@ -1003,11 +1011,22 @@ a { color: var(--secondary); text-decoration: none; }
     .nav-menu a {
         display: block;
         padding: 15px 20px;
+        font-size: 0.95rem;
+    }
+
+    /* Hero */
+    .hero {
+        min-height: 85vh;
+        padding: 40px 0;
+    }
+
+    .blur-1, .blur-2, .blur-3 {
+        opacity: 0.15;
     }
 
     .hero-wrapper {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 30px;
     }
 
     .hero-visual {
@@ -1015,7 +1034,52 @@ a { color: var(--secondary); text-decoration: none; }
     }
 
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    .hero-text {
+        font-size: 0.95rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .hero-buttons .btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 20px;
+    }
+
+    /* Stats */
+    .stats {
+        padding: 60px 0;
+    }
+
+    .stats-bento {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .stat-box {
+        padding: 25px 15px;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    /* Services */
+    .services {
+        padding: 60px 0;
+    }
+
+    .services-bento {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 220px;
+        gap: 15px;
     }
 
     .service-large,
@@ -1023,58 +1087,408 @@ a { color: var(--secondary); text-decoration: none; }
         grid-column: span 1;
     }
 
-    .contact-wrapper {
-        grid-template-columns: 1fr;
-        gap: 40px;
+    .service-item {
+        border-radius: 16px;
     }
 
-    .services-bento {
-        grid-auto-rows: 200px;
-    }
-}
-
-@media (max-width: 480px) {
-    h1 { font-size: 2rem; }
-    h2 { font-size: 1.5rem; }
-
-    .btn {
-        padding: 10px 20px;
-        font-size: 0.9rem;
+    .service-content {
+        padding: 20px;
     }
 
-    .hero-title {
-        font-size: 1.8rem;
+    .service-icon {
+        font-size: 2rem;
     }
 
-    .stats-bento {
-        grid-template-columns: repeat(2, 1fr);
+    .service-item h3 {
+        font-size: 1.1rem;
     }
 
-    .stat-box {
-        padding: 25px;
-    }
-
-    .stat-number {
-        font-size: 1.8rem;
+    /* Impact */
+    .impact {
+        padding: 60px 0;
     }
 
     .impact-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .impact-card {
+        padding: 30px 20px;
+    }
+
+    .impact-number {
+        font-size: 2.5rem;
+    }
+
+    /* Process */
+    .process {
+        padding: 60px 0;
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .process-steps::before {
+        display: none;
+    }
+
+    .step-number {
+        width: 80px;
+        height: 80px;
+        font-size: 1.8rem;
+    }
+
+    .process-step {
+        padding: 30px 20px;
+    }
+
+    /* Testimonials */
+    .testimonials {
+        padding: 60px 0;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .testimonial {
+        padding: 25px;
+    }
+
+    /* CTA */
+    .cta {
+        padding: 60px 0;
+    }
+
+    .cta-content h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Contact */
+    .contact {
+        padding: 60px 0;
+    }
+
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .contact-info {
+        gap: 15px;
+    }
+
+    .contact-item {
+        padding: 15px;
+    }
+
+    .contact-form {
+        padding: 25px;
+        gap: 14px;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+        padding: 11px 14px;
+        font-size: 1rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 50px 0 20px;
+    }
+
+    .footer-content {
+        gap: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 16px;
+    }
+
+    h1 { font-size: 1.8rem; line-height: 1.3; }
+    h2 { font-size: 1.4rem; }
+    h3 { font-size: 1rem; }
+    p { font-size: 0.9rem; }
+
+    .btn {
+        padding: 12px 18px;
+        font-size: 0.9rem;
+        border-radius: 10px;
+    }
+
+    /* Hero */
+    .hero {
+        min-height: 70vh;
+        padding: 30px 0;
+    }
+
+    .hero-badge {
+        font-size: 0.8rem;
+        padding: 8px 14px;
+    }
+
+    .hero-title {
+        font-size: 1.7rem;
+    }
+
+    .hero-text {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .hero-buttons .btn {
+        font-size: 0.85rem;
+        padding: 12px 16px;
+    }
+
+    /* Section Headers */
+    .section-header {
+        margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+    }
+
+    .section-header h2::after {
+        bottom: -12px;
+        width: 50px;
+    }
+
+    .section-header p {
+        font-size: 0.95rem;
+    }
+
+    /* Stats */
+    .stats {
+        padding: 40px 0;
+    }
+
+    .stats-bento {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .stat-box {
+        padding: 20px 12px;
+        border-radius: 14px;
+    }
+
+    .stat-number {
+        font-size: 1.6rem;
+    }
+
+    .stat-label {
+        font-size: 0.8rem;
+    }
+
+    /* Services */
+    .services {
+        padding: 40px 0;
     }
 
     .services-bento {
         grid-template-columns: 1fr;
+        grid-auto-rows: 200px;
+        gap: 12px;
     }
 
-    .contact-form {
+    .service-content {
+        padding: 18px;
+    }
+
+    .service-icon {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+    }
+
+    .service-item h3 {
+        font-size: 1rem;
+        margin-bottom: 10px;
+    }
+
+    .service-item p {
+        font-size: 0.8rem;
+        display: none;
+    }
+
+    /* Impact */
+    .impact {
+        padding: 40px 0;
+    }
+
+    .impact-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .impact-card {
+        padding: 25px 18px;
+    }
+
+    .impact-number {
+        font-size: 2.2rem;
+    }
+
+    .impact-chart {
+        height: 70px;
+    }
+
+    .chart-bar {
+        width: 10px;
+    }
+
+    /* Process */
+    .process {
+        padding: 40px 0;
+    }
+
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+
+    .step-number {
+        width: 70px;
+        height: 70px;
+        font-size: 1.5rem;
+    }
+
+    .process-step {
+        padding: 25px 15px;
+    }
+
+    .process-step h3 {
+        font-size: 1rem;
+    }
+
+    .process-step p {
+        font-size: 0.85rem;
+    }
+
+    /* Testimonials */
+    .testimonials {
+        padding: 40px 0;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .testimonial {
         padding: 20px;
     }
 
-    .contact-item {
-        flex-direction: column;
+    .testimonial p {
+        font-size: 0.85rem;
+        line-height: 1.6;
+    }
+
+    .author-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .author-name {
+        font-size: 0.9rem;
+    }
+
+    .author-role {
+        font-size: 0.75rem;
+    }
+
+    /* CTA */
+    .cta {
+        padding: 50px 0;
     }
 
     .cta-content h2 {
         font-size: 1.5rem;
+    }
+
+    .cta-content p {
+        font-size: 0.95rem;
+    }
+
+    /* Contact */
+    .contact {
+        padding: 40px 0;
+    }
+
+    .contact-wrapper {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .contact-info {
+        gap: 12px;
+    }
+
+    .contact-item {
+        padding: 14px;
+        border-radius: 12px;
+    }
+
+    .contact-icon {
+        font-size: 1.5rem;
+    }
+
+    .contact-label {
+        font-size: 0.75rem;
+    }
+
+    .contact-value {
+        font-size: 0.95rem;
+    }
+
+    .contact-form {
+        padding: 20px;
+        gap: 12px;
+        background: transparent;
+        border: none;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 0.95rem;
+    }
+
+    .contact-form button {
+        padding: 13px 20px;
+        font-size: 0.9rem;
+    }
+
+    /* Footer */
+    .footer {
+        padding: 40px 0 20px;
+    }
+
+    .footer-section {
+        margin-bottom: 20px;
+    }
+
+    .footer-section h4 {
+        font-size: 0.85rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+        font-size: 0.85rem;
+    }
+
+    .footer-bottom {
+        font-size: 0.8rem;
     }
 }
