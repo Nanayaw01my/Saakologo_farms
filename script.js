@@ -1,22 +1,29 @@
-// Mobile Menu Toggle
+// ============================================
+// MOBILE MENU
+// ============================================
+
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('navMenu');
 
-menuToggle.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    menuToggle.classList.toggle('active');
-});
-
-// Close menu when a link is clicked
-const navLinks = navMenu.querySelectorAll('a');
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        menuToggle.classList.remove('active');
+if (menuToggle) {
+    menuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        menuToggle.classList.toggle('active');
     });
-});
 
-// Smooth scrolling for anchor links
+    // Close menu when link is clicked
+    navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            menuToggle.classList.remove('active');
+        });
+    });
+}
+
+// ============================================
+// SMOOTH SCROLLING
+// ============================================
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
@@ -31,87 +38,177 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Contact Form Handler
-const contactForm = document.getElementById('contactForm');
+// ============================================
+// SCROLL TO TOP BUTTON
+// ============================================
 
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
+function createScrollToTopButton() {
+    const button = document.createElement('button');
+    button.id = 'scrollToTop';
+    button.className = 'scroll-to-top';
+    button.innerHTML = '<i class="fas fa-arrow-up"></i>';
+    button.setAttribute('aria-label', 'Scroll to top');
+    document.body.appendChild(button);
 
-        // Get form values
-        const name = contactForm.querySelector('input[type="text"]').value.trim();
-        const email = contactForm.querySelector('input[type="email"]').value.trim();
-        const phone = contactForm.querySelector('input[type="tel"]').value.trim();
-        const service = contactForm.querySelector('select').value;
-        const message = contactForm.querySelector('textarea').value.trim();
-
-        // Validate form data
-        if (!name || !email || !phone || !service || !message) {
-            showNotification('Please fill in all fields', 'error');
-            return;
+    // Add styles
+    const styles = `
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #388e3c, #2e7d32);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            z-index: 999;
+            transition: all 0.3s ease;
         }
 
-        // Validate email format
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-            showNotification('Please enter a valid email address', 'error');
-            return;
+        .scroll-to-top.show {
+            display: flex;
         }
 
-        // Validate phone format
-        const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
-        if (!phoneRegex.test(phone)) {
-            showNotification('Please enter a valid phone number', 'error');
-            return;
+        .scroll-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.2);
         }
 
-        // Simulate form submission
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
+        @media (max-width: 480px) {
+            .scroll-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+    `;
 
-        // Simulate API call
-        setTimeout(() => {
-            // Generate WhatsApp message with service name
-            const serviceNames = {
-                'pig': 'Pig Farming',
-                'poultry': 'Poultry Farming',
-                'turkey': 'Turkey Production',
-                'crop': 'Crop Farming',
-                'partnership': 'Order & Partnership'
-            };
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = styles;
+    document.head.appendChild(styleSheet);
 
-            const serviceName = serviceNames[service] || service;
-            const whatsappMessage = `Hi Saakologo Farms,\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${serviceName}\n\nMessage:\n${message}`;
-            const whatsappUrl = `https://wa.me/233557480306?text=${encodeURIComponent(whatsappMessage)}`;
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            button.classList.add('show');
+        } else {
+            button.classList.remove('show');
+        }
+    });
 
-            showNotification('✓ Message ready! Opening WhatsApp...', 'success');
-
-            // Reset form
-            contactForm.reset();
-
-            // Redirect to WhatsApp after 1.5 seconds
-            setTimeout(() => {
-                window.open(whatsappUrl, '_blank');
-            }, 1500);
-
-            // Reset button
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-        }, 1000);
+    button.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 }
 
-// Notification System
-function showNotification(message, type = 'success') {
-    // Remove existing notifications
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
+createScrollToTopButton();
+
+// ============================================
+// CONTACT FORM HANDLER
+// ============================================
+
+const contactForm = document.getElementById('contactForm');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', handleFormSubmit);
+}
+
+function handleFormSubmit(e) {
+    e.preventDefault();
+
+    // Get form inputs
+    const inputs = contactForm.querySelectorAll('input, select, textarea');
+    const data = {};
+
+    inputs.forEach(input => {
+        if (input.type !== 'submit') {
+            if (input.name) {
+                data[input.name] = input.value;
+            } else if (input.placeholder) {
+                if (input.type === 'text' && !data.name) data.name = input.value;
+                else if (input.type === 'email') data.email = input.value;
+                else if (input.type === 'tel') data.phone = input.value;
+                else if (input.tagName === 'TEXTAREA') data.message = input.value;
+            }
+        }
+    });
+
+    // Get values from inputs if not captured by name/placeholder
+    const allInputs = contactForm.querySelectorAll('input, select, textarea');
+    if (!data.name && allInputs[0]) data.name = allInputs[0].value;
+    if (!data.email && allInputs[1]) data.email = allInputs[1].value;
+    if (!data.phone && allInputs[2]) data.phone = allInputs[2].value;
+    if (!data.service && allInputs[3]) data.service = allInputs[3].value;
+    if (!data.message && allInputs[4]) data.message = allInputs[4].value;
+
+    // Validate
+    if (!data.name || !data.email || !data.phone || !data.service || !data.message) {
+        showNotification('Please fill in all fields', 'error');
+        return;
     }
 
-    // Create notification element
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(data.email)) {
+        showNotification('Please enter a valid email', 'error');
+        return;
+    }
+
+    const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
+    if (!phoneRegex.test(data.phone)) {
+        showNotification('Please enter a valid phone number', 'error');
+        return;
+    }
+
+    // Submit
+    const button = contactForm.querySelector('button[type="submit"]');
+    const originalText = button.innerHTML;
+    button.disabled = true;
+    button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Sending...</span>';
+
+    setTimeout(() => {
+        const serviceNames = {
+            'pig': 'Pig Farming',
+            'poultry': 'Poultry Farming',
+            'turkey': 'Turkey Production',
+            'crop': 'Crop Farming',
+            'partnership': 'Business Partnership',
+            'consultation': 'Expert Consultation'
+        };
+
+        const serviceName = serviceNames[data.service] || data.service;
+        const whatsappMessage = `Hello Saakologo Farms,\n\nName: ${data.name}\nEmail: ${data.email}\nPhone: ${data.phone}\nService: ${serviceName}\n\nMessage:\n${data.message}`;
+        const whatsappUrl = `https://wa.me/233557480306?text=${encodeURIComponent(whatsappMessage)}`;
+
+        showNotification('✓ Message ready! Opening WhatsApp...', 'success');
+        contactForm.reset();
+
+        setTimeout(() => {
+            window.open(whatsappUrl, '_blank');
+        }, 1500);
+
+        button.disabled = false;
+        button.innerHTML = originalText;
+    }, 1000);
+}
+
+// ============================================
+// NOTIFICATION SYSTEM
+// ============================================
+
+function showNotification(message, type = 'success') {
+    const existing = document.querySelector('.notification');
+    if (existing) existing.remove();
+
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.innerHTML = `
@@ -120,10 +217,8 @@ function showNotification(message, type = 'success') {
             <span>${message}</span>
         </div>
     `;
-
     document.body.appendChild(notification);
 
-    // Add styles for notification if not already added
     if (!document.querySelector('#notification-styles')) {
         const style = document.createElement('style');
         style.id = 'notification-styles';
@@ -134,7 +229,7 @@ function showNotification(message, type = 'success') {
                 right: 20px;
                 padding: 16px 24px;
                 border-radius: 8px;
-                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+                box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
                 animation: slideIn 0.3s ease;
                 z-index: 1000;
                 max-width: 400px;
@@ -157,10 +252,6 @@ function showNotification(message, type = 'success') {
                 gap: 12px;
             }
 
-            .notification-content i {
-                font-size: 1.2rem;
-            }
-
             @keyframes slideIn {
                 from {
                     transform: translateX(400px);
@@ -172,22 +263,10 @@ function showNotification(message, type = 'success') {
                 }
             }
 
-            @keyframes slideOut {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(400px);
-                    opacity: 0;
-                }
-            }
-
             @media (max-width: 480px) {
                 .notification {
                     right: 10px;
                     left: 10px;
-                    top: 10px;
                     max-width: none;
                 }
             }
@@ -195,74 +274,20 @@ function showNotification(message, type = 'success') {
         document.head.appendChild(style);
     }
 
-    // Auto remove notification after 5 seconds
     setTimeout(() => {
         notification.style.animation = 'slideOut 0.3s ease forwards';
-        setTimeout(() => {
-            notification.remove();
-        }, 300);
+        setTimeout(() => notification.remove(), 300);
     }, 5000);
 }
 
-// Create Scroll to Top Button
-function createScrollToTopButton() {
-    const button = document.createElement('button');
-    button.id = 'scrollToTop';
-    button.className = 'scroll-to-top';
-    button.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    button.setAttribute('aria-label', 'Scroll to top');
-    document.body.appendChild(button);
+// ============================================
+// FORM VALIDATION
+// ============================================
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            button.classList.add('show');
-        } else {
-            button.classList.remove('show');
-        }
-    });
+const formInputs = document.querySelectorAll('.contact-form input, .contact-form select, .contact-form textarea');
 
-    button.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-}
-
-createScrollToTopButton();
-
-// Intersection Observer for animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observe elements for animation
-document.querySelectorAll('.service-card, .feature-item, .testimonial-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(el);
-});
-
-// Form input validation with real-time feedback
-const inputs = document.querySelectorAll('.contact-form input, .contact-form select, .contact-form textarea');
-
-inputs.forEach(input => {
-    input.addEventListener('blur', () => {
-        validateInput(input);
-    });
-
+formInputs.forEach(input => {
+    input.addEventListener('blur', () => validateInput(input));
     input.addEventListener('input', () => {
         if (input.classList.contains('error')) {
             validateInput(input);
@@ -277,24 +302,15 @@ function validateInput(input) {
     if (!value) {
         isValid = false;
     } else if (input.type === 'email') {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        isValid = emailRegex.test(value);
+        isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     } else if (input.type === 'tel') {
-        const phoneRegex = /^[\d\s\-\+\(\)]{10,}$/;
-        isValid = phoneRegex.test(value);
+        isValid = /^[\d\s\-\+\(\)]{10,}$/.test(value);
     } else if (input.tagName === 'SELECT') {
         isValid = value !== '';
     }
 
-    if (isValid) {
-        input.classList.remove('error');
-        input.classList.add('valid');
-    } else {
-        input.classList.remove('valid');
-        input.classList.add('error');
-    }
-
-    return isValid;
+    input.classList.toggle('error', !isValid);
+    input.classList.toggle('valid', isValid);
 }
 
 // Add validation styles
@@ -316,9 +332,41 @@ validationStyles.textContent = `
 `;
 document.head.appendChild(validationStyles);
 
-// Lazy load images
+// ============================================
+// INTERSECTION OBSERVER - ANIMATIONS
+// ============================================
+
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+// Observe service cards, feature boxes, testimonials
+document.querySelectorAll(
+    '.service-card, .feature-box, .testimonial-card, .stat-card, .process-step'
+).forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
+
+// ============================================
+// LAZY LOAD IMAGES
+// ============================================
+
 if ('IntersectionObserver' in window) {
-    const imageObserver = new IntersectionObserver((entries, observer) => {
+    const imageObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 const img = entry.target;
@@ -326,7 +374,7 @@ if ('IntersectionObserver' in window) {
                     img.src = img.dataset.src;
                 }
                 img.classList.add('loaded');
-                observer.unobserve(img);
+                imageObserver.unobserve(img);
             }
         });
     });
@@ -336,20 +384,25 @@ if ('IntersectionObserver' in window) {
     });
 }
 
-// Add smooth scroll behavior for older browsers
-if (!CSS.supports('scroll-behavior', 'smooth')) {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            const target = document.querySelector(href);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({ behavior: 'auto', block: 'start' });
-            }
-        });
-    });
-}
+// ============================================
+// NAVBAR SCROLL EFFECT
+// ============================================
 
-// Log when page loads
-console.log('🌾 Saakologo Farms website loaded successfully!');
-console.log('Together, let\'s grow agriculture and feed our nation!');
+const navbar = document.querySelector('.navbar');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        navbar.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.12)';
+    } else {
+        navbar.style.boxShadow = 'none';
+    }
+    lastScroll = window.scrollY;
+});
+
+// ============================================
+// INITIALIZATION
+// ============================================
+
+console.log('🌾 Saakologo Farms - Professional Agriculture Platform');
+console.log('✓ All systems ready. Together, let\'s grow agriculture!');
