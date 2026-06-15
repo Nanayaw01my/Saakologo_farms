@@ -1,16 +1,16 @@
-// Mobile Menu
-const menuToggle = document.getElementById('menuToggle');
-const navLinks = document.getElementById('navLinks');
+// Hamburger Menu
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
 
-menuToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    menuToggle.classList.toggle('active');
+hamburger.addEventListener('click', () => {
+    navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
 });
 
-navLinks.querySelectorAll('a').forEach(link => {
+navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        menuToggle.classList.remove('active');
+        navMenu.classList.remove('active');
+        hamburger.classList.remove('active');
     });
 });
 
@@ -48,19 +48,19 @@ contactForm.addEventListener('submit', (e) => {
         return;
     }
 
-    const serviceNames = {
+    const serviceMap = {
         'pig': 'Pig Farming',
-        'poultry': 'Poultry Farming',
-        'turkey': 'Turkey Production',
-        'crop': 'Crop Farming',
+        'poultry': 'Poultry',
+        'turkey': 'Turkey',
+        'crop': 'Crops',
         'partnership': 'Partnership'
     };
 
-    const msg = `Hi Saakologo Farms,\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${serviceNames[service]}\n\nMessage: ${message}`;
+    const msg = `Hi Saakologo Farms,\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${serviceMap[service]}\n\nMessage: ${message}`;
     const whatsappUrl = `https://wa.me/233557480306?text=${encodeURIComponent(msg)}`;
 
     window.open(whatsappUrl, '_blank');
     contactForm.reset();
 });
 
-console.log('Saakologo Farms - Professional Agricultural Solutions');
+console.log('Saakologo Farms 2026 - Sharp Modern Design');

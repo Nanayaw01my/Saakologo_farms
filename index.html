@@ -3,28 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saakologo Farms - Premium Agricultural Solutions</title>
-    <meta name="description" content="Ghana's premier agricultural company. Premium livestock farming, sustainable crop solutions, and nationwide delivery.">
+    <title>Saakologo Farms – Modern Agriculture Solutions</title>
+    <meta name="description" content="Premium agricultural platform for Ghana's farmers. Quality livestock, sustainable crops, nationwide delivery.">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
-            <div class="nav-flex">
-                <div class="logo">Saakologo Farms</div>
-                <button class="menu-toggle" id="menuToggle">
-                    <span></span>
-                    <span></span>
+            <div class="nav-content">
+                <a href="#" class="logo">Saakologo</a>
+                <button class="hamburger" id="hamburger">
                     <span></span>
                 </button>
-                <ul class="nav-links" id="navLinks">
+                <ul class="nav-menu" id="navMenu">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#contact" class="nav-cta">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -32,16 +30,17 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-bg" style="background-image: url('https://images.unsplash.com/photo-1500595046891-ffc0be06de35?w=1200&h=600&fit=crop');"></div>
-        <div class="hero-overlay"></div>
-        <div class="container">
+        <div class="hero-wrapper">
             <div class="hero-content">
-                <h1>Premium Agricultural Solutions for Ghana</h1>
-                <p>Trusted by 2,500+ farmers nationwide. Quality livestock, sustainable crops, reliable delivery.</p>
-                <div class="hero-cta">
-                    <a href="#contact" class="btn btn-white">Get Started</a>
-                    <a href="https://wa.me/233557480306?text=Hi%20Saakologo%20Farms%2C%20I%20would%20like%20to%20know%20more%20about%20your%20services" target="_blank" class="btn btn-outline">WhatsApp</a>
+                <h1>Agricultural Excellence<br>Made Simple</h1>
+                <p>Premium livestock and sustainable crops. Trusted by 2,500+ farmers across Ghana.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Start Now</a>
+                    <a href="https://wa.me/233557480306?text=Hi%20Saakologo%20Farms%2C%20I%20want%20to%20learn%20more" target="_blank" class="btn btn-secondary">WhatsApp</a>
                 </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1500595046891-ffc0be06de35?w=700&h=600&fit=crop&q=80" alt="Premium livestock">
             </div>
         </div>
     </section>
@@ -49,83 +48,70 @@
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
-            <div class="section-title">
-                <h2>Our Services</h2>
-                <p>Comprehensive agricultural solutions for modern farmers</p>
+            <div class="services-header">
+                <h2>What We Offer</h2>
+                <p>Six core services designed for farmer success</p>
             </div>
 
-            <div class="services-showcase">
-                <div class="service-main">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1516688394881-90f6b58f59f1?w=800&h=500&fit=crop" alt="Pig Farming">
-                    </div>
-                    <div class="service-details">
-                        <h3>Premium Pig Farming</h3>
-                        <p>Health-certified piglets and breeding stock. Expert guidance from selection to market. Maximize productivity with our proven methodology and support.</p>
-                        <ul class="service-list">
-                            <li><i class="fas fa-check"></i> Certified healthy stock</li>
-                            <li><i class="fas fa-check"></i> Expert farmer support</li>
-                            <li><i class="fas fa-check"></i> Nationwide delivery</li>
-                        </ul>
-                        <a href="#contact" class="btn btn-primary">Learn More</a>
+            <div class="services-featured">
+                <div class="service-featured-item">
+                    <img src="https://images.unsplash.com/photo-1516688394881-90f6b58f59f1?w=800&h=600&fit=crop&q=80" alt="Pig Farming">
+                    <div class="featured-content">
+                        <h3>Pig Farming Excellence</h3>
+                        <p>Health-certified piglets and premium breeding stock. Complete guidance from selection to market optimization.</p>
+                        <a href="#contact" class="link-arrow">Explore →</a>
                     </div>
                 </div>
             </div>
 
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop" alt="Poultry Farming">
+                <a href="#contact" class="service-item">
+                    <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&h=400&fit=crop&q=80" alt="Poultry">
+                    <div class="service-info">
+                        <h4>Poultry Farming</h4>
+                        <p>Quality birds for eggs and meat</p>
                     </div>
-                    <h3>Poultry Farming</h3>
-                    <p>Quality birds for maximum egg and meat production. Healthy, productive stock selected for excellence.</p>
-                    <a href="#contact" class="service-arrow">→</a>
-                </div>
+                </a>
 
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1560807707-2cc8b63f4e0b?w=400&h=300&fit=crop" alt="Turkey Production">
+                <a href="#contact" class="service-item">
+                    <img src="https://images.unsplash.com/photo-1560807707-2cc8b63f4e0b?w=500&h=400&fit=crop&q=80" alt="Turkey">
+                    <div class="service-info">
+                        <h4>Turkey Production</h4>
+                        <p>Strong, healthy turkeys</p>
                     </div>
-                    <h3>Turkey Production</h3>
-                    <p>Strong, healthy turkeys with excellent growth rates. Perfect for farms and commercial operations.</p>
-                    <a href="#contact" class="service-arrow">→</a>
-                </div>
+                </a>
 
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=300&fit=crop" alt="Livestock">
+                <a href="#contact" class="service-item">
+                    <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=500&h=400&fit=crop&q=80" alt="Crops">
+                    <div class="service-info">
+                        <h4>Sustainable Crops</h4>
+                        <p>Organic farming solutions</p>
                     </div>
-                    <h3>Sustainable Crops</h3>
-                    <p>Premium crop solutions using sustainable farming practices. Maximize yield with expert guidance.</p>
-                    <a href="#contact" class="service-arrow">→</a>
-                </div>
+                </a>
 
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=400&h=300&fit=crop" alt="Delivery">
+                <a href="#contact" class="service-item">
+                    <img src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?w=500&h=400&fit=crop&q=80" alt="Partnership">
+                    <div class="service-info">
+                        <h4>Partnerships</h4>
+                        <p>Strategic business solutions</p>
                     </div>
-                    <h3>Nationwide Delivery</h3>
-                    <p>Fast, reliable logistics across all 16 regions of Ghana. Safe, on-time delivery guaranteed.</p>
-                    <a href="#contact" class="service-arrow">→</a>
-                </div>
+                </a>
 
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="Partnership">
+                <a href="#contact" class="service-item">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=500&h=400&fit=crop&q=80" alt="Delivery">
+                    <div class="service-info">
+                        <h4>Fast Delivery</h4>
+                        <p>Nationwide logistics</p>
                     </div>
-                    <h3>Business Partnerships</h3>
-                    <p>Strategic partnerships for reliable supply chains. Competitive pricing and customized solutions.</p>
-                    <a href="#contact" class="service-arrow">→</a>
-                </div>
+                </a>
 
-                <div class="service-card">
-                    <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=400&h=300&fit=crop" alt="Consultation">
+                <a href="#contact" class="service-item">
+                    <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=500&h=400&fit=crop&q=80" alt="Support">
+                    <div class="service-info">
+                        <h4>Expert Support</h4>
+                        <p>24/7 farm guidance</p>
                     </div>
-                    <h3>Expert Consultation</h3>
-                    <p>Professional farm management advice. Optimize productivity and profitability with our expertise.</p>
-                    <a href="#contact" class="service-arrow">→</a>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -134,25 +120,21 @@
     <section class="stats">
         <div class="container">
             <div class="stats-grid">
-                <div class="stat-box">
-                    <div class="stat-icon"><i class="fas fa-users"></i></div>
-                    <div class="stat-number">2,500+</div>
-                    <div class="stat-text">Farmers</div>
+                <div class="stat">
+                    <div class="stat-num">2,500<span>+</span></div>
+                    <p>Active Farmers</p>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-icon"><i class="fas fa-map-marker-alt"></i></div>
-                    <div class="stat-number">16</div>
-                    <div class="stat-text">Regions</div>
+                <div class="stat">
+                    <div class="stat-num">16</div>
+                    <p>Regions Served</p>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-icon"><i class="fas fa-award"></i></div>
-                    <div class="stat-number">10+</div>
-                    <div class="stat-text">Years</div>
+                <div class="stat">
+                    <div class="stat-num">10<span>+</span></div>
+                    <p>Years Experience</p>
                 </div>
-                <div class="stat-box">
-                    <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
-                    <div class="stat-number">100%</div>
-                    <div class="stat-text">Quality</div>
+                <div class="stat">
+                    <div class="stat-num">100<span>%</span></div>
+                    <p>Quality Assured</p>
                 </div>
             </div>
         </div>
@@ -161,42 +143,30 @@
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <div class="about-grid">
+            <div class="about-wrapper">
                 <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1500595046891-ffc0be06de35?w=600&h=600&fit=crop" alt="Livestock farming">
+                    <img src="https://images.unsplash.com/photo-1500595046891-ffc0be06de35?w=600&h=700&fit=crop&q=80" alt="Agriculture">
                 </div>
                 <div class="about-content">
-                    <h2>About Saakologo Farms</h2>
-                    <p>Based in Navrongo, Ghana, Saakologo Farms is the nation's leading agricultural solutions provider. For over a decade, we've been committed to delivering premium quality livestock and sustainable farming solutions to farmers across all 16 regions.</p>
-                    <p>Our mission is simple: provide quality, reliable service, and expert support to help farmers succeed. We believe in growing agriculture and feeding our nation.</p>
+                    <h2>Transforming Agriculture in Ghana</h2>
+                    <p>Based in Navrongo, we're Ghana's leading agricultural innovation platform. Over 10 years of trusted service to farmers nationwide.</p>
+                    <p>Our mission: deliver premium quality livestock and sustainable crop solutions while supporting farmer success across all regions.</p>
                     <div class="about-features">
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fas fa-certificate"></i></div>
-                            <div class="feature-info">
-                                <h4>Certified Quality</h4>
-                                <p>All livestock certified for health</p>
-                            </div>
+                        <div class="feature">
+                            <div class="feature-icon">✓</div>
+                            <h4>Certified Quality</h4>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fas fa-headset"></i></div>
-                            <div class="feature-info">
-                                <h4>Expert Support</h4>
-                                <p>24/7 farmer guidance</p>
-                            </div>
+                        <div class="feature">
+                            <div class="feature-icon">✓</div>
+                            <h4>Expert Guidance</h4>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fas fa-truck"></i></div>
-                            <div class="feature-info">
-                                <h4>Fast Delivery</h4>
-                                <p>Nationwide logistics</p>
-                            </div>
+                        <div class="feature">
+                            <div class="feature-icon">✓</div>
+                            <h4>Reliable Delivery</h4>
                         </div>
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fas fa-star"></i></div>
-                            <div class="feature-info">
-                                <h4>Proven Track Record</h4>
-                                <p>2,500+ satisfied farmers</p>
-                            </div>
+                        <div class="feature">
+                            <div class="feature-icon">✓</div>
+                            <h4>24/7 Support</h4>
                         </div>
                     </div>
                 </div>
@@ -207,45 +177,42 @@
     <!-- Testimonials -->
     <section class="testimonials">
         <div class="container">
-            <div class="section-title">
-                <h2>What Farmers Say</h2>
-                <p>Real success stories from farmers across Ghana</p>
-            </div>
+            <h2>Trusted by Farmers</h2>
             <div class="testimonials-grid">
-                <div class="testimonial">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">K</div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Changed my farming completely. Quality stock, expert support, reliable delivery. 45% productivity increase in 6 months!"</p>
+                    <div class="author">
+                        <div class="avatar">K</div>
                         <div>
-                            <h4>Kwesi Mensah</h4>
-                            <p>Pig Farmer, Kumasi</p>
+                            <strong>Kwesi Mensah</strong>
+                            <span>Kumasi</span>
                         </div>
                     </div>
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Saakologo transformed my farming business. Quality stock, excellent support, and reliable delivery. Productivity increased by 45% in 6 months!"</p>
                 </div>
 
-                <div class="testimonial">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">A</div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Best poultry supplier. Healthy birds, perfect delivery, amazing support team. Highly recommended for all farmers!"</p>
+                    <div class="author">
+                        <div class="avatar">A</div>
                         <div>
-                            <h4>Ama Osei</h4>
-                            <p>Poultry Farmer, Accra</p>
+                            <strong>Ama Osei</strong>
+                            <span>Accra</span>
                         </div>
                     </div>
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Best poultry supplier in Ghana. Birds are always healthy, delivery is fast, and their support team is incredibly helpful. Worth every investment!"</p>
                 </div>
 
-                <div class="testimonial">
-                    <div class="testimonial-header">
-                        <div class="testimonial-avatar">Y</div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Professional, reliable, results-driven. Farm productivity increased significantly. Can't imagine farming without them!"</p>
+                    <div class="author">
+                        <div class="avatar">Y</div>
                         <div>
-                            <h4>Yaw Boateng</h4>
-                            <p>Turkey Producer, Takoradi</p>
+                            <strong>Yaw Boateng</strong>
+                            <span>Takoradi</span>
                         </div>
                     </div>
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p>"Professional, reliable, and results-driven. My farm productivity skyrocketed. Can't imagine farming without Saakologo's support anymore!"</p>
                 </div>
             </div>
         </div>
@@ -254,48 +221,45 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <div class="section-title">
-                <h2>Get In Touch</h2>
-                <p>Ready to grow your farm with us?</p>
-            </div>
-
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="info-card">
-                        <div class="info-icon"><i class="fas fa-phone"></i></div>
-                        <h4>WhatsApp & Phone</h4>
-                        <p><a href="tel:+233557480306">+233 557 480 306</a></p>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
-                        <h4>Location</h4>
-                        <p>Navrongo, Ghana</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon"><i class="fas fa-envelope"></i></div>
-                        <h4>Email</h4>
-                        <p><a href="mailto:info@saakologofarms.com">info@saakologofarms.com</a></p>
-                    </div>
-                    <div class="info-card">
-                        <div class="info-icon"><i class="fab fa-instagram"></i></div>
-                        <h4>Follow Us</h4>
-                        <p><a href="https://instagram.com/saakologo.archive" target="_blank">@saakologo.archive</a></p>
+            <h2>Get Started Today</h2>
+            <div class="contact-wrapper">
+                <div class="contact-methods">
+                    <a href="tel:+233557480306" class="contact-method">
+                        <div class="method-icon">📱</div>
+                        <div class="method-info">
+                            <h4>Phone</h4>
+                            <p>+233 557 480 306</p>
+                        </div>
+                    </a>
+                    <a href="https://instagram.com/saakologo.archive" target="_blank" class="contact-method">
+                        <div class="method-icon">📸</div>
+                        <div class="method-info">
+                            <h4>Instagram</h4>
+                            <p>@saakologo.archive</p>
+                        </div>
+                    </a>
+                    <div class="contact-method">
+                        <div class="method-icon">📍</div>
+                        <div class="method-info">
+                            <h4>Location</h4>
+                            <p>Navrongo, Ghana</p>
+                        </div>
                     </div>
                 </div>
 
                 <form class="contact-form" id="contactForm">
                     <input type="text" placeholder="Your Name" required>
-                    <input type="email" placeholder="Your Email" required>
-                    <input type="tel" placeholder="Your Phone" required>
+                    <input type="email" placeholder="Email Address" required>
+                    <input type="tel" placeholder="Phone Number" required>
                     <select required>
                         <option value="">Select Service</option>
                         <option value="pig">Pig Farming</option>
-                        <option value="poultry">Poultry Farming</option>
-                        <option value="turkey">Turkey Production</option>
-                        <option value="crop">Crop Farming</option>
+                        <option value="poultry">Poultry</option>
+                        <option value="turkey">Turkey</option>
+                        <option value="crop">Crops</option>
                         <option value="partnership">Partnership</option>
                     </select>
-                    <textarea placeholder="Your Message" rows="5" required></textarea>
+                    <textarea placeholder="Message" rows="4" required></textarea>
                     <button type="submit" class="btn btn-primary btn-full">Send Message</button>
                 </form>
             </div>
@@ -307,15 +271,14 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col">
-                    <h3>Saakologo Farms</h3>
-                    <p>Ghana's premier agricultural solutions provider. Growing agriculture, feeding our nation.</p>
+                    <h4>Saakologo Farms</h4>
+                    <p>Ghana's leading agricultural innovation platform.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Services</h4>
                     <ul>
                         <li><a href="#services">Pig Farming</a></li>
-                        <li><a href="#services">Poultry Farming</a></li>
-                        <li><a href="#services">Turkey Production</a></li>
+                        <li><a href="#services">Poultry</a></li>
                         <li><a href="#services">Crops</a></li>
                     </ul>
                 </div>
@@ -325,12 +288,11 @@
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="https://instagram.com/saakologo.archive" target="_blank">Instagram</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Saakologo Farms. All rights reserved. Growing agriculture and feeding our nation. 🌾</p>
+                <p>&copy; 2026 Saakologo Farms. Growing agriculture across Ghana.</p>
             </div>
         </div>
     </footer>
