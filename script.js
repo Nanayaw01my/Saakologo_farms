@@ -63,4 +63,24 @@ contactForm.addEventListener('submit', (e) => {
     contactForm.reset();
 });
 
-console.log('Saakologo Farms - Beautiful Modern Design');
+// Intersection Observer for fade-in animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.service-card, .testimonial, .stat-item, .contact-box').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+});
+
+console.log('Saakologo Farms - Modern 2026 Design');
