@@ -1,86 +1,55 @@
-// Mobile Menu
-const menuBtn = document.getElementById('menuBtn');
-const navLinks = document.getElementById('navLinks');
+// Mobile Menu Toggle
+const navToggle = document.getElementById('navToggle');
+const navMenu = document.getElementById('navMenu');
 
-menuBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    menuBtn.classList.toggle('active');
+navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navMenu.classList.toggle('active');
 });
 
-navLinks.querySelectorAll('a').forEach(link => {
+// Close menu when link is clicked
+document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        menuBtn.classList.remove('active');
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('active');
     });
 });
 
-// Smooth Scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        const href = this.getAttribute('href');
-        if (href !== '#' && document.querySelector(href)) {
-            e.preventDefault();
-            document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
-        }
-    });
-});
-
-// Contact Form
+// Form Submission
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const inputs = contactForm.querySelectorAll('input, select, textarea');
-    const name = inputs[0].value.trim();
-    const email = inputs[1].value.trim();
-    const phone = inputs[2].value.trim();
-    const service = inputs[3].value;
-    const message = inputs[4].value.trim();
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const service = document.getElementById('service').value;
+    const message = document.getElementById('message').value.trim();
 
     if (!name || !email || !phone || !service || !message) {
-        alert('Please fill all fields');
+        alert('Please fill in all fields');
         return;
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        alert('Invalid email');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address');
         return;
     }
 
     const services = {
         'pig': 'Pig Farming',
-        'poultry': 'Poultry Farming',
+        'poultry': 'Poultry Production',
         'turkey': 'Turkey Production',
         'crop': 'Crop Farming',
-        'partnership': 'Partnership'
+        'delivery': 'Nationwide Delivery',
+        'partnership': 'Strategic Partnerships'
     };
 
-    const msg = `Hi Saakologo Farms,\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${services[service]}\n\nMessage: ${message}`;
-    const whatsappUrl = `https://wa.me/233557480306?text=${encodeURIComponent(msg)}`;
+    const messageText = `Hi Saakologo Farms,\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nService: ${services[service]}\n\nMessage: ${message}`;
+    const whatsappUrl = `https://wa.me/233557480306?text=${encodeURIComponent(messageText)}`;
 
     window.open(whatsappUrl, '_blank');
     contactForm.reset();
 });
-
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards';
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.service-card, .testimonial, .stat-item, .contact-box').forEach(el => {
-    el.style.opacity = '0';
-    observer.observe(el);
-});
-
-console.log('Saakologo Farms - Modern 2026 Design');
