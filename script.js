@@ -1,21 +1,20 @@
-// Mobile Menu Toggle
-const menuBtn = document.getElementById('menuBtn');
-const navMenu = document.getElementById('navMenu');
+// Mobile Menu
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
 
-menuBtn.addEventListener('click', () => {
-    navMenu.classList.toggle('active');
-    menuBtn.classList.toggle('active');
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    menuToggle.classList.toggle('active');
 });
 
-// Close menu when link clicked
-navMenu.querySelectorAll('a').forEach(link => {
+navLinks.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
-        navMenu.classList.remove('active');
-        menuBtn.classList.remove('active');
+        navLinks.classList.remove('active');
+        menuToggle.classList.remove('active');
     });
 });
 
-// Smooth scrolling
+// Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         const href = this.getAttribute('href');
@@ -39,18 +38,16 @@ contactForm.addEventListener('submit', (e) => {
     const service = inputs[3].value;
     const message = inputs[4].value;
 
-    // Validate
     if (!name || !email || !phone || !service || !message) {
-        alert('Please fill in all fields');
+        alert('Please fill all fields');
         return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        alert('Please enter a valid email');
+        alert('Invalid email');
         return;
     }
 
-    // Send via WhatsApp
     const serviceNames = {
         'pig': 'Pig Farming',
         'poultry': 'Poultry Farming',
@@ -66,4 +63,4 @@ contactForm.addEventListener('submit', (e) => {
     contactForm.reset();
 });
 
-console.log('Saakologo Farms - Professional Agriculture Solutions');
+console.log('Saakologo Farms - Professional Agricultural Solutions');
