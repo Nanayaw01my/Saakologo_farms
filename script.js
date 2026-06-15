@@ -1,17 +1,16 @@
-// Mobile Menu Toggle
+// Mobile Navigation
 const navToggle = document.getElementById('navToggle');
-const navMenu = document.getElementById('navMenu');
+const navList = document.getElementById('navList');
 
 navToggle.addEventListener('click', () => {
     navToggle.classList.toggle('active');
-    navMenu.classList.toggle('active');
+    navList.classList.toggle('active');
 });
 
-// Close menu when link is clicked
-document.querySelectorAll('.nav-link').forEach(link => {
+document.querySelectorAll('.nav-main a').forEach(link => {
     link.addEventListener('click', () => {
         navToggle.classList.remove('active');
-        navMenu.classList.remove('active');
+        navList.classList.remove('active');
     });
 });
 
